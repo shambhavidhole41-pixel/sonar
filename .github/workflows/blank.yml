@@ -1,3 +1,10 @@
-name: SonarQube Analysis on: push: branches: - main jobs: sonar: name: SonarQube Scan Job runs-on: ubuntu-latest
+name: Test Workflow
 
-steps: - name: Checkout Source Code uses: actions/checkout@v3 - name: Setup Node.js uses: actions/setup-node@v3 with: node-version: '18' - name: Install Dependencies run: npm install - name: SonarQube Scan uses: SonarSource/sonarqube-scan-action@v1.2.0 with: args: > -Dsonar.projectKey=sonar-node-app -Dsonar.sources=. env: SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} SONAR_HOST_URL: http://YOUR_SERVER_IP:9000 - name: Check Quality Gate uses: SonarSource/sonarqube-quality-gate-action@v1.1.0 timeout-minutes: 5 env: SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} 
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print message
+        run: echo "Hello, GitHub Actions!"
